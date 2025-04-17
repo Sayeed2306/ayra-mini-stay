@@ -5,9 +5,68 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ayra Mini Stay</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; background: #f9f9f9; }
+    input, button { padding: 10px; margin: 5px 0; width: 100%; max-width: 400px; }
+    .box { max-width: 500px; margin: auto; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px #ccc; }
+  </style>
 </head>
 <body>
-  <h1>Welcome to Ayra Mini Stay</h1>
-  <p>Your private bungalow getaway in Lonavala with a pool!</p>
+  <div class="box">
+    <h2>Ayra Mini Stay – Heritage Booking</h2>
+    <form id="bookingForm">
+      <input type="text" id="guestName" placeholder="Name of Guest" required><br>
+      <input type="tel" id="mobile" placeholder="Mobile Number" required><br>
+      <input type="email" id="email" placeholder="Email Address" required><br>
+      <input type="date" id="checkIn" required><br>
+      <input type="date" id="checkOut" required><br>
+      <input type="number" id="adults" placeholder="Number of Adults" required><br>
+      <input type="number" id="kids" placeholder="Number of Kids (below 8)" required><br>
+      <button type="button" onclick="calculatePrice()">Check Availability</button>
+    </form>
+
+    <div id="result" style="margin-top:20px;"></div>
+  </div>
+
+  <script>
+    function calculatePrice() {
+      const checkIn = new Date(document.getElementById('checkIn').value);
+      const checkOut = new Date(document.getElementById('checkOut').value);
+      const guestName = document.getElementById('guestName').value;
+      const mobile = document.getElementById('mobile').value;
+      const email = document.getElementById('email').value;
+      const adults = document.getElementById('adults').value;
+      const kids = document.getElementById('kids').value;
+
+      if (checkIn >= checkOut) {
+        alert('Check-out date must be after check-in.');
+        return;
+      }
+
+      let total = 0;
+      const tempDate = new Date(checkIn);
+      while (tempDate < checkOut) {
+        const day = tempDate.getDay();
+        if (day >= 1 && day <= 4) total += 15000;
+        else if (day === 5 || day === 0) total += 20000;
+        else if (day === 6) total += 30000;
+        tempDate.setDate(tempDate.getDate() + 1);
+      }
+
+      const message = \`Hi! I'm interested in booking Heritage from \${checkIn.toDateString()} to \${checkOut.toDateString()} for \${adults} adults and \${kids} kids.\`;
+      const whatsappURL = \`https://wa.me/919158230601?text=\${encodeURIComponent(message)}\`;
+
+      document.getElementById('result').innerHTML = \`
+        <h3>Property: Heritage – 4 BHK with Private Pool</h3>
+        <p>Total Stay Cost: <strong>₹\${total.toLocaleString()}</strong></p>
+        <p>Optional Food:</p>
+        <ul>
+          <li>Veg – ₹1,200/head</li>
+          <li>Non-Veg – ₹1,500/head</li>
+        </ul>
+        <a href="\${whatsappURL}" target="_blank" style="display:inline-block;margin-top:10px;background:#25D366;color:#fff;padding:10px 15px;border-radius:5px;text-decoration:none;">Contact via WhatsApp</a>
+      \`;
+    }
+  </script>
 </body>
 </html>
