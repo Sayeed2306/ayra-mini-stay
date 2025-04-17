@@ -53,19 +53,19 @@
         tempDate.setDate(tempDate.getDate() + 1);
       }
 
-      const message = \`Hi! I'm interested in booking Heritage from \${checkIn.toDateString()} to \${checkOut.toDateString()} for \${adults} adults and \${kids} kids.\`;
-      const whatsappURL = \`https://wa.me/919158230601?text=\${encodeURIComponent(message)}\`;
+      const message = `Hi! I'm interested in booking Heritage from ${checkIn.toDateString()} to ${checkOut.toDateString()} for ${adults} adults and ${kids} kids.`;
+      const whatsappURL = `https://wa.me/919158230601?text=${encodeURIComponent(message)}`;
 
-      document.getElementById('result').innerHTML = \`
+      document.getElementById('result').innerHTML = `
         <h3>Property: Heritage – 4 BHK with Private Pool</h3>
-        <p>Total Stay Cost: <strong>₹\${total.toLocaleString()}</strong></p>
+        <p>Total Stay Cost: <strong>₹${total.toLocaleString()}</strong></p>
         <p>Optional Food:</p>
         <ul>
           <li>Veg – ₹1,200/head</li>
           <li>Non-Veg – ₹1,500/head</li>
         </ul>
-        <a href="\${whatsappURL}" target="_blank" style="display:inline-block;margin-top:10px;background:#25D366;color:#fff;padding:10px 15px;border-radius:5px;text-decoration:none;">Contact via WhatsApp</a>
-      \`;
+        <a href="${whatsappURL}" target="_blank" style="display:inline-block;margin-top:10px;background:#25D366;color:#fff;padding:10px 15px;border-radius:5px;text-decoration:none;">Contact via WhatsApp</a>
+      `;
     }
   </script>
 </body>
