@@ -30,16 +30,24 @@
 
   <script>
     function calculatePrice() {
-      const checkIn = new Date(document.getElementById('checkIn').value);
-      const checkOut = new Date(document.getElementById('checkOut').value);
-      const guestName = document.getElementById('guestName').value;
-      const mobile = document.getElementById('mobile').value;
-      const email = document.getElementById('email').value;
+      const guestName = document.getElementById('guestName').value.trim();
+      const mobile = document.getElementById('mobile').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const checkInValue = document.getElementById('checkIn').value;
+      const checkOutValue = document.getElementById('checkOut').value;
       const adults = document.getElementById('adults').value;
       const kids = document.getElementById('kids').value;
 
+      if (!guestName || !mobile || !email || !checkInValue || !checkOutValue || !adults || !kids) {
+        alert('Please fill in all fields.');
+        return;
+      }
+
+      const checkIn = new Date(checkInValue);
+      const checkOut = new Date(checkOutValue);
+
       if (checkIn >= checkOut) {
-        alert('Check-out date must be after check-in.');
+        alert('Check-out date must be after check-in date.');
         return;
       }
 
