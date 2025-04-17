@@ -21,7 +21,7 @@
       <input type="date" id="checkIn" required><br>
       <input type="date" id="checkOut" required><br>
       <input type="number" id="adults" placeholder="Number of Adults" required><br>
-      <input type="number" id="kids" placeholder="Number of Kids (below 8)" required><br>
+      <input type="number" id="kids" placeholder="Number of Kids (below 8) (optional)"><br>
       <button type="button" onclick="calculatePrice()">Check Availability</button>
     </form>
 
@@ -36,10 +36,10 @@
       const checkInValue = document.getElementById('checkIn').value;
       const checkOutValue = document.getElementById('checkOut').value;
       const adults = document.getElementById('adults').value;
-      const kids = document.getElementById('kids').value;
+      const kids = document.getElementById('kids').value || "0"; // Optional
 
-      if (!guestName || !mobile || !email || !checkInValue || !checkOutValue || !adults || !kids) {
-        alert('Please fill in all fields.');
+      if (!guestName || !mobile || !email || !checkInValue || !checkOutValue || !adults) {
+        alert('Please fill in all required fields.');
         return;
       }
 
@@ -62,7 +62,7 @@
       }
 
       const message = `Hi! I'm interested in booking Heritage from ${checkIn.toDateString()} to ${checkOut.toDateString()} for ${adults} adults and ${kids} kids.`;
-      const whatsappURL = `https://wa.me/919158230601?text=${encodeURIComponent(message)}`;
+      const whatsappURL = `https://wa.me/message/7YP6W4G32G45G1?text=${encodeURIComponent(message)}`;
 
       document.getElementById('result').innerHTML = `
         <h3>Property: Heritage – 4 BHK with Private Pool</h3>
